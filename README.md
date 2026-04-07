@@ -13,3 +13,5 @@ With some tinkering, this could be a good step for ensuring balance.
 # Buff Debuff Class
 add a buff/debuff class that stores any modifiers that will be added to a creature.
 
+# Balanced attributes
+e.g. if a character is heavy, they will move slow but have more health, if they are light, they can move quick but has less health
