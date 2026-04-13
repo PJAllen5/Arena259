@@ -1,35 +1,35 @@
-// An incomplete example of what a base creature class might look like.
+#ifndef CREATURE_H
+#define CREATURE_H
 
 #include <string>
 
-class Creature {
-    public:
-        void printStats();
-        Creature();
-        Creature(int hp, int attack, int defense, int special)
-            : hp_(hp)
-            , attack_(attack)
-            , defense_(defense)
-            , special_(special) 
-            {};
-             void takeDamage(int damage);
-        ~Creature();
-    protected:
-        virtual void attackPrimary(Creature& target) = 0;
-        virtual void useSpecialAbility(Creature& target) = 0;
-    private:
-        int point_pool_ = 30;
-        int hp_;
-        int attack_;
-        int defense_;
-        int special_;
-        bool checkStats();
+class Creature
+{
+public:
+    std::string name;
+    int health;
+    int damage;
+
+    Creature(std::string n, int h, int d)
+    {
+        name = n;
+        health = h;
+        damage = d;
+    }
+
+    void attack(Creature &other)
+    {
+        other.health -= damage;
+        if (other.health < 0)
+        {
+            other.health = 0;
+        }
+    }
+
+    bool isAlive()
+    {
+        return health > 0;
+    }
 };
 
-void Creature::takeDamage(int damage) {
-    hp_ -= std::abs(damage) - (defense_ % 2);
-}
-
-bool Creature::checkStats() {
-    return hp_ + attack_ + defense_ + special_ == point_pool_;
-}
+#endif

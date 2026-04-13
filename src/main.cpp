@@ -1,6 +1,12 @@
 #include "arena.h"
-#include <iostream>
+#include "creature.h"
 
-int main(int argc, char* argv[]) {
+int main()
+{
+    Creature c1("Alpha", 100, 15);
+    Creature c2("Beta", 100, 12);
+
+    Arena::battle(c1, c2);
+
     return 0;
 }
