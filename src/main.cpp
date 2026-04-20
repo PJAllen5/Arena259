@@ -3,6 +3,7 @@
 #include "./creatures/viper.h"
 #include "./creatures/giantleech.h"
 
+
 int main()
 {
     Creature c1(makeViper());
