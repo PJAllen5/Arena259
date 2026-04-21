@@ -1,2 +1,6 @@
+.gitignore
 /env
 arena
+main
+Makefile
+test1
