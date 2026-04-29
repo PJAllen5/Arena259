@@ -4,7 +4,7 @@
 #include "../src/creature.h"
 
 
-// Factore function for a basic creature
+// Factory function for a basic creature
 Creature TestCreature1() {
 	return Creature("Test", 20, 10); // create a creature
 					  // named "Test" with 20 health and 10 damage

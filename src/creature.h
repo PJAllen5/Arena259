@@ -4,6 +4,10 @@
 #include <string>
 #include <iostream>
 
+const int MIN_HEALTH = 80;
+const int MAX_HEALTH = 120;
+
+
 class Creature
 {
 public:
@@ -34,8 +38,8 @@ public:
     }
 
     static bool validate(Creature &c){
-        if(c.health <= 0 || c.health > 120){
-            std::cerr << "Error: " << c.name << " has invalid health. Health must be > 0 or <= 120" << std::endl;
+        if(c.health < MIN_HEALTH || c.health > MAX_HEALTH){
+            std::cerr << "Error: " << c.name << " has invalid health. Health must be between " << MIN_HEALTH << " and " << MAX_HEALTH << std::endl;
             return false;
         }
         if(c.damage <= 0 || c.damage > 20){
@@ -43,6 +47,8 @@ public:
             return false;
         }
         return true;
+        // minimum health to start a battle is 80, otherwise the battle would be predictable
+        // 
     }
 
     /*
