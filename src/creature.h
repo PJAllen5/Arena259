@@ -4,58 +4,56 @@
 #include <string>
 #include <iostream>
 
+// Added many new initialized constants to set parameters for creature stats.
+const int MIN_HEALTH = 80;
+const int MAX_HEALTH = 120;
+const int MIN_DAMAGE = 1;
+const int MAX_DAMAGE = 20;
+const int MIN_DEFENSE = 0;
+const int MAX_DEFENSE = 10;
+const int MIN_HEALING = 0;
+const int MAX_HEALING = 20;
+
 class Creature
 {
-public:
+
+// Created private member variables including one static variable for use across all creature class members.
+private:
     std::string name;
+    int maxHealth;
     int health;
     int damage;
+    int defense;
+    int healing;
+    static int creatureCount;
 
-    Creature(std::string n, int h, int d)
-    {
-        name = n;
-        health = h;
-        damage = d;
-    }
+// Added public member methods methods.
+public:
+    // Instantiates a Creature constructor method with five parameters.
+    Creature(std::string n, int h, int d, int def, int heal);
+    
+    // Created getter methods to access all private memebr variables.
+    std::string getName() const { return name; }
+    int getMaxHealth() const { return maxHealth; }
+    int getHealth() const { return health; }
+    int getDamage() const { return damage; }
+    int getDefense() const { return defense; }
+    int getHealing() const { return healing; }
 
-    void attack(Creature &other)
-    {
+    // Added methods for taking damage, healing (a new, special method), and attacking.
+    void takeDamage(int amount);
+    void heal();
+    void attack(Creature &other);
+    bool isAlive() const;
 
-        other.health -= damage;
-        if (other.health < 0)
-        {
-            other.health = 0;
-        }
-    }
+    // Returns total creatures created using static private variable.
+    static int getCreatureCount() { return creatureCount; }
 
-    bool isAlive()
-    {
-        return health > 0;
-    }
+    // Validation method checking creatures using new methods. Justifies creation of new global constanst variables above.
+    static bool validate(const Creature &c);
 
-    static bool validate(Creature &c){
-        if(c.health <= 0 || c.health > 120){
-            std::cerr << "Error: " << c.name << " has invalid health. Health must be > 0 or <= 120" << std::endl;
-            return false;
-        }
-        if(c.damage <= 0 || c.damage > 20){
-            std::cerr << "Error: " << c.name << " has invalid damage. Damage must be > 0 or <= 20" << std::endl;
-            return false;
-        }
-        return true;
-    }
-
-    /*
-    If Creature a or b does not have the valid stats for health or damage
-    It will output an error message and abort
-    */
-    static bool validateBattle(Creature &a, Creature &b){
-        if(!validate(a) || !validate(b)){
-            std::cerr << "The Battle cannot take place as there are invalid stats" << std::endl;
-            return false;
-        }
-        return true;
-    }
+    // Validates that both creatures have valid stats for battle.
+    static bool validateBattle(const Creature &a, const Creature &b);
 };
 
 #endif

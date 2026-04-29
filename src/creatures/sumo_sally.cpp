@@ -7,7 +7,7 @@
 // When in a battle, this creature does not use sumo wrestling at all but instead just insults people.
  
 Creature make_sumo_sally(){
-     return Creature("sumo_sally", 120, 10);
+     return Creature("sumo_sally", 120, 10, 5, 10);
 }
 
 //commenting out code, used for testing
