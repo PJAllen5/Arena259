@@ -15,18 +15,23 @@ const int Creature::MAX_DAMAGE;
 
 
 // Constructor
-Creature::Creature(const std::string& newName, const int& newHealth, const int& newDamage) {
-	setName(newName); // set all starting variables
+Creature::Creature(std::string name, int health, int damage) 
+	: name(name)
+	, health(health)
+	, startHealth(health)
+	, damage(damage)
+	, startDamage(damage)
+	, defense(0)
+	{ creatureCount++; }
 
-	startHealth = newHealth;
-	setHealth(newHealth);
-
-	setDamage(newDamage);
-	startDamage = newDamage;
-	damageDealt = 0;
-
-	creatureCount++;
-}
+Creature::Creature(std::string name, int health, int damage, int defense) 
+	: name(name)
+	, health(health)
+	, startHealth(health)
+	, damage(damage)
+	, startDamage(damage)
+	, defense(defense)
+	{ creatureCount++; }
 
 
 // Getters
@@ -98,26 +103,32 @@ void Creature::incDamageDealt(const int& increase) {
 	damageDealt += increase;
 }
 
+void Creature::takeDamage(int amount) {
+	int reduced = amount - defense;
+	if (reduced < 0) reduced = 0;
 
-// Methods interacting with other creatures (attacking, etc..)
-bool Creature::attack(Creature& otherCreature) {
-	takeDamage(otherCreature);
-	incDamageDealt(getDamage());
-	return true;
+	health = std::max(0, health - reduced);
 }
-void Creature::takeDamage(Creature &otherCreature) {
-	otherCreature.setHealth(otherCreature.getHealth() - getDamage()); // set health to current health minus the creatures damage
+
+// Methods interacting with other creatures
+void Creature::attack(Creature& target) {
+	target.takeDamage(damage);
+	incDamageDealt(damage);
 }
+
 
 
 // Validation
 bool Creature::validate(Creature& creatureCheck) {
 	if (creatureCheck.getHealth() < MIN_HEALTH || creatureCheck.getHealth() > MAX_HEALTH) { // check health is in a valid range
-		std::cerr << "Error: " << creatureCheck.getName() << " has invalid health (" << creatureCheck.getHealth() << " HP). Health must be between " << MIN_HEALTH << " and " << MAX_HEALTH << std::endl; // print out an error 
+		
+		std::cerr << "Error: " << creatureCheck.getName() << " has invalid health (" << creatureCheck.getHealth() 
+		<< " HP). Health must be between " << MIN_HEALTH << " and " << MAX_HEALTH << std::endl; // print out an error 
 		return false; // failed to validate
 	}
 	if (creatureCheck.getDamage() < MIN_DAMAGE || creatureCheck.getDamage() > MAX_DAMAGE) {
-		std::cerr << "Error: " << creatureCheck.getName() << " has invalid damage (" << creatureCheck.getDamage() <<  " DMG). Damage must be between " << MIN_DAMAGE << " and " << MAX_DAMAGE << std::endl;
+		std::cerr << "Error: " << creatureCheck.getName() << " has invalid damage (" << creatureCheck.getDamage() 
+		<<  " DMG). Damage must be between " << MIN_DAMAGE << " and " << MAX_DAMAGE << std::endl;
 		return false; // failed to validate
 	}
 	return true; // validation passed

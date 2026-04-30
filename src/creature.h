@@ -25,13 +25,15 @@ private:
 	int health;
 	int startDamage; // maximum damage stat
 	int damage;
-	int damageDealt;
+	int damageDealt = 0;
+	int defense;
 	// the start variables don't get setters, since they don't ever change.
 	// we can't make them const though because they are declare on construction.
 
 public:
 	// Constructor 
-	Creature(const std::string&, const int&, const int&); // name, health, damage
+	Creature(std::string name, int health, int damage); 
+	Creature(std::string name, int health, int damage, int defense);
 
 	// Getters
 	std::string getName() const; // returns the name variable
@@ -52,10 +54,8 @@ public:
 	void incDamageDealt(const int&); // increase damage dealt stat
 
 	// Damage other creatures
-	bool attack(Creature&); // decreases the health of another creature,
-				// returns true if successfully attacked creature
-				// returns false otherwise
-	void takeDamage(Creature&); // decrease the other creatures health by this creatures damage
+	void attack(Creature& target); // decreases health of target 
+	void takeDamage(int amount); // decrease this creature's health by amount - defense
 
 	// Validation checks
 	static bool validate(Creature&); // returns true if health and damage are in valid

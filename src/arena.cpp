@@ -31,8 +31,8 @@ void Arena::battle(Creature &temp1, Creature &temp2)
     while (a.isAlive() && b.isAlive())
     {
         std::cout << "\n-----------------------------\n";
-	std::cout << "Turn " << turn << std::endl;
-	std::cout << "-----------------------------\n";
+	    std::cout << "Turn " << turn << std::endl;
+	    std::cout << "-----------------------------\n";
 
 
 	std::cout << std::left
@@ -54,8 +54,8 @@ void Arena::battle(Creature &temp1, Creature &temp2)
 
     // Ezra's custom battle statistics code    
     // print out battle stats
-    //std::cout << std::endl;
-    //printStats(a, b, turn);
+    std::cout << std::endl;
+    printStats(a, b, turn);
 }
 
 void Arena::printStats(Creature& a, Creature& b, int turns) {
