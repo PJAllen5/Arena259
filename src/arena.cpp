@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include "arena.h"
-#include "arenarand.h"
+#include "rng.h"
 
 void Arena::battle(Creature &temp1, Creature &temp2)
 {
@@ -9,7 +9,7 @@ void Arena::battle(Creature &temp1, Creature &temp2)
     Creature* first;
     Creature* second;
 
-    if (ArenaRand::flipCoin() == 1) {
+    if (RNG::flipCoin() == 1) {
         first = &temp1;
         second = &temp2;
     } else {
