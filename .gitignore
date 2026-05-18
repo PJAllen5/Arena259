@@ -10,5 +10,3 @@ test.pp
 dragon.cpp
 dragon.h
 test.cpp
-creature.h
-creature.cpp
