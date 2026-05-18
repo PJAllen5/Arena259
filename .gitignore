@@ -5,3 +5,5 @@ Makefile
 test1
 *.exe
 .vscode/
+arena-test
+src/test.cpp
