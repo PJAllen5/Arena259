@@ -102,7 +102,6 @@ void Creature::incDamageDealt(const int& increase) {
 	damageDealt += increase;
 }
 
-
 void Creature::takeDamage(int amount) {
 	int reduced = amount - defense;
 	if (reduced < 0) reduced = 0;
