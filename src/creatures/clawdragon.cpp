@@ -15,4 +15,5 @@ void Clawdragon::specialMove(Creature& other){
               << slashDamage << " damage" << std::endl;
     other.takeDamage(slashDamage);
     incDamageDealt(slashDamage);
+    
 }
