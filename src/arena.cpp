@@ -31,8 +31,8 @@ void Arena::battle(Creature &temp1, Creature &temp2)
     while (a.isAlive() && b.isAlive())
     {
         std::cout << "\n-----------------------------\n";
-	    std::cout << "Turn " << turn << std::endl;
-	    std::cout << "-----------------------------\n";
+		std::cout << "Turn " << turn << std::endl;
+		std::cout << "-----------------------------\n";
 
 
 	std::cout << std::left
